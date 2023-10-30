@@ -3,7 +3,7 @@ if [ -z $1 ]
 then
     echo "No parameter passed"
     exit
-elsef
+else
     echo "Chain: $1"
 fi
 chain=$1
@@ -12,7 +12,7 @@ if [ -z $2 ]
 then
     echo "No second parameter passed"
     exit
-elsef
+else
     echo "Node service: $2"
 fi
 service=$2

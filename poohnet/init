@@ -3,7 +3,7 @@ if [ -z $1 ]
 then
     echo "No parameter passed"
     exit
-elsef
+else
     echo "Config: $1"
 fi
 config=$1
@@ -12,15 +12,13 @@ if [ -z $2 ]
 then
     echo "No second parameter passed"
     exit
-elsef
+else
     echo "Node: $2"
 fi
 number=$2
 
 sudo rm -rf $HOME/.pooh/el
 mkdir -p $HOME/.pooh/el
-sudo rm -rf /home/ubuntu/.pooh/el
-mkdir $HOME/.pooh/el
 mkdir $HOME/.pooh/el/geth
 mkdir $HOME/.pooh/el/keystore
 
@@ -41,6 +39,7 @@ else
   exit
 fi
 echo "Configure folder: $config_folder"
+echo "Genesis file: $genesis_file"
 
 cp -rf ./$config_folder/el/template/node$number/* $HOME/.pooh/el
 
