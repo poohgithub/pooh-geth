@@ -133,6 +133,8 @@ var (
 		TerminalTotalDifficultyPassed: true,
 		Ethash:                        new(EthashConfig),
 		Clique:                        nil,
+		PoohnetBlock:                  nil,
+		Poohnet:                       &PoohnetConfig{common.Address{}, *big.NewInt(0), *big.NewInt(0)},
 	}
 
 	AllDevChainProtocolChanges = &ChainConfig{
@@ -184,6 +186,8 @@ var (
 		TerminalTotalDifficultyPassed: false,
 		Ethash:                        nil,
 		Clique:                        &CliqueConfig{Period: 0, Epoch: 30000},
+		PoohnetBlock:                  nil,
+		Poohnet:                       &PoohnetConfig{common.Address{}, *big.NewInt(0), *big.NewInt(0)},
 	}
 
 	// TestChainConfig contains every protocol change (EIPs) introduced
@@ -214,6 +218,8 @@ var (
 		TerminalTotalDifficultyPassed: false,
 		Ethash:                        new(EthashConfig),
 		Clique:                        nil,
+		PoohnetBlock:                  nil,
+		Poohnet:                       &PoohnetConfig{common.Address{}, *big.NewInt(0), *big.NewInt(0)},
 	}
 
 	// NonActivatedConfig defines the chain configuration without activating
@@ -244,6 +250,8 @@ var (
 		TerminalTotalDifficultyPassed: false,
 		Ethash:                        new(EthashConfig),
 		Clique:                        nil,
+		PoohnetBlock:                  nil,
+		Poohnet:                       &PoohnetConfig{common.Address{}, *big.NewInt(0), *big.NewInt(0)},
 	}
 	TestRules = TestChainConfig.Rules(new(big.Int), false, 0)
 )
@@ -304,6 +312,10 @@ type ChainConfig struct {
 	Ethash    *EthashConfig `json:"ethash,omitempty"`
 	Clique    *CliqueConfig `json:"clique,omitempty"`
 	IsDevMode bool          `json:"isDev,omitempty"`
+
+	// Poohnet
+	PoohnetBlock *big.Int       `json:"poohnetBlock,omitempty"` // poohnet switch block (nil = no fork, 0 = already on poohnet)
+	Poohnet      *PoohnetConfig `json:"poohnet,omitempty"`      // poohnet config
 }
 
 // EthashConfig is the consensus engine configs for proof-of-work based sealing.
@@ -323,6 +335,13 @@ type CliqueConfig struct {
 // String implements the stringer interface, returning the consensus engine details.
 func (c *CliqueConfig) String() string {
 	return "clique"
+}
+
+type PoohnetConfig struct {
+	// Commons budget
+	CommonsBudget                common.Address `json:"commonsBudget"`                // Commons budget address (This will most likey be the Address of Smart Contract)
+	CommonsBudgetReward          big.Int        `json:"commonsBudgetReward"`          // Amount of coins rewarded to the commons budget per block
+	LastCommonsBudgetRewardBlock big.Int        `json:"lastCommonsBudgetRewardBlock"` // Last block number when commons budget was rewarded
 }
 
 // Description returns a human-readable description of ChainConfig.
@@ -487,6 +506,11 @@ func (c *ChainConfig) IsArrowGlacier(num *big.Int) bool {
 // IsGrayGlacier returns whether num is either equal to the Gray Glacier (EIP-5133) fork block or greater.
 func (c *ChainConfig) IsGrayGlacier(num *big.Int) bool {
 	return isBlockForked(c.GrayGlacierBlock, num)
+}
+
+// IsPoohnet returns whether num is either equal to the Poohnet changes are activated
+func (c *ChainConfig) IsPoohnet(num *big.Int) bool {
+	return isBlockForked(c.PoohnetBlock, num)
 }
 
 // IsTerminalPoWBlock returns whether the given block is the last block of PoW stage.
