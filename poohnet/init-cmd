@@ -1,0 +1,55 @@
+#!/bin/sh
+if [ -z $1 ]
+then
+    echo "No parameter passed"
+    exit
+else
+    echo "Config: $1"
+fi
+config=$1
+
+if [ -z $2 ]
+then
+    echo "No second parameter passed"
+    exit
+else
+    echo "Node: $2"
+fi
+number=$2
+
+genesis_file="genesis.json"
+
+if [ "$config" = "pow" ]
+then
+  config_folder="config"
+elif [ "$config" = "pos" ]
+then
+  config_folder="config4pos"
+elif [ "$config" = "local" ]
+then
+  config_folder="config"
+  genesis_file="genesis_local.json"
+elif [ "$config" = "zksync" ]
+then
+  config_folder="config"
+  genesis_file="genesis_local_zksync.json"
+elif [ "$config" = "poohnet" ]
+then
+  config_folder="config"
+  genesis_file="genesis_poohnet.json"
+else
+  echo "Invalid config parameter"
+  exit
+fi
+echo "Configure folder: $config_folder"
+echo "Genesis file: $genesis_file"
+
+cp -rf ./$config_folder/el/template/node$number/* $HOME/.pooh/el
+
+geth --datadir=$HOME/.pooh/el init ./$config_folder/el/$genesis_file
+
+
+if [ $number -ne 0 ]
+then
+  cp -f ./$config_folder/el/nodekey/nodekey$number $HOME/.pooh/el/geth/nodekey
+fi

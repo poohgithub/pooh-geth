@@ -15,6 +15,12 @@
     "clique": {
       "period": 14,
       "epoch": 30000
+    },
+    "poohnetBlock": 30,
+    "poohnet": {
+      "commonsBudget": "0xeEdC2Ac65dF232AB6d229EBD4E3F564e194ffe7D",
+      "commonsBudgetReward": 120000000000000000000,
+      "lastCommonsBudgetRewardBlock": 15000100
     }
   },
   "difficulty": "1",
