@@ -30,14 +30,6 @@ then
 elif [ "$config" = "pos" ]
 then
   config_folder="config4pos"
-elif [ "$config" = "local" ]
-then
-  config_folder="config"
-  genesis_file="genesis_local.json"
-elif [ "$config" = "zksync" ]
-then
-  config_folder="config"
-  genesis_file="genesis_local_zksync.json"
 else
   echo "Invalid config parameter"
   exit

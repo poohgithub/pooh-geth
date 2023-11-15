@@ -29,10 +29,6 @@ elif [ "$config" = "local" ]
 then
   config_folder="config"
   genesis_file="genesis_local.json"
-elif [ "$config" = "zksync" ]
-then
-  config_folder="config"
-  genesis_file="genesis_local_zksync.json"
 elif [ "$config" = "poohnet" ]
 then
   config_folder="config"
