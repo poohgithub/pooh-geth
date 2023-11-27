@@ -2,6 +2,8 @@
 if [ -z $1 ]
 then
     echo "No parameter passed"
+    echo "Usage: ./enode pow el1"
+    echo "Usage: ./enode pos el1"
     exit
 else
     echo "Chain: $1"

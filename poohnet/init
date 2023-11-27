@@ -2,6 +2,8 @@
 if [ -z $1 ]
 then
     echo "No parameter passed"
+    echo "Usage: ./init local 1"
+    echo "Usage: ./init pow 1"
     exit
 else
     echo "Config: $1"
