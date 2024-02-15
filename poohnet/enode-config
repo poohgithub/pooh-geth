@@ -18,9 +18,9 @@ geth \
 --http.addr="0.0.0.0" \
 --http.port=8545 \
 --http.corsdomain="*" \
---http.api="eth,net,txpool,web3" \
+--http.api="personal,eth,net,txpool,web3" \
 --http.vhosts="*" \
 --ws \
 --ws.port=8546 \
---ws.api="eth,net,txpool,web3" \
+--ws.api="personal,eth,net,txpool,web3" \
 --ws.origins="*"
