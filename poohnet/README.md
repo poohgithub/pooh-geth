@@ -32,3 +32,16 @@ cd poohnet
 ```
 ./enode pow el1
 ```
+
+## Run Local Net
+
+### compile
+```
+./compile
+```
+
+### run node
+init은 위의 [Run Testnet](#run-testnet) 참고
+```
+./enode-config
+```

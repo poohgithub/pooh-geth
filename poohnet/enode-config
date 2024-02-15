@@ -1,6 +1,6 @@
 #!/bin/sh
 
-geth \
+sudo geth \
 --datadir=$HOME/.pooh/el \
 --syncmode=full \
 --networkid=12301 \
