@@ -36,20 +36,33 @@ cd poohnet
 ./init testnet 1
 ```
 
+`Password:` 프롬프트에 대해서는 로컬시스템 사용자 계정 암호를 입력
+
 ### run node
 ```
-./enode pow el1
+./enode testnet enode1
 ```
 
-## Run Local Net
+## Run with local binary
+다음은 로컬에서 빌드한 바이너리를 이용해서 노드를 띄우는 경우
 
 ### compile
 ```
 ./compile
 ```
 
+### init node
+`poohnet` 폴더로 이용
+```
+cd poohnet
+```
+노드가 하나인 테스트넷을 실행시킬때
+```
+./init testnet 1
+```
+
 ### run node
 init은 위의 [Run Testnet](#run-testnet) 참고
 ```
-./enode-config
+./enode-cmd
 ```
