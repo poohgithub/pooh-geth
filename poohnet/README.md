@@ -1,3 +1,11 @@
+## Overview
+### Network ID
+The network id is only set in these files.
+- Mainnet: 12300 (set in ./poohnet/config/el/genesis.json)
+- Mainnet for merge: 12300 (set in ./poohnet/config/el/genesis_merge.json)
+- Testnet: 12301 (set in ./poohnet/config/el/genesis_testnet.json)
+- Localnet: 12302 (set in ./poohnet/config/el/genesis_local.json)
+
 ## Run Testnet
 
 ### stop & remote docker
