@@ -2,8 +2,9 @@
 if [ -z $1 ]
 then
     echo "No parameter passed"
-    echo "Usage: ./enode pow el1"
-    echo "Usage: ./enode pos el1"
+    echo "Usage: ./enode mainnet enode1"
+    echo "Usage: ./enode testnet enode1"
+    echo "Usage: ./enode pos enode1"
     exit
 else
     echo "Chain: $1"
@@ -19,9 +20,15 @@ else
 fi
 service=$2
 
-if [ "$chain" = "pow" ]
+if [ "$chain" = "mainnet" ]
 then
   docker compose -f docker-compose-node.yml up $service -d
+elif [ "$chain" = "testnet" ]
+then
+  docker compose -f docker-compose-node-testnet.yml up $service -d
+elif [ "$chain" = "devnet" ]
+then
+  docker compose -f docker-compose-node-devnet.yml up $service -d
 elif [ "$chain" = "pos" ]
 then
   docker compose -f docker-compose-node-pos.yml up $service -d
