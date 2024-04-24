@@ -2,9 +2,9 @@
 if [ -z $1 ]
 then
     echo "No parameter passed"
-    echo "Usage: ./enode mainnet enode1"
-    echo "Usage: ./enode testnet enode1"
-    echo "Usage: ./enode pos enode1"
+    echo "Usage: ./enode mainnet node1"
+    echo "Usage: ./enode testnet node1"
+    echo "Usage: ./enode pos node1"
     exit
 else
     echo "Chain: $1"
