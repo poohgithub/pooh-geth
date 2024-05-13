@@ -427,7 +427,8 @@ func (st *StateTransition) TransitionDb() (*ExecutionResult, error) {
 		st.refundGas(params.RefundQuotientEIP3529)
 	}
 	effectiveTip := msg.GasPrice
-	if rules.IsLondon {
+	// stop burning base fees if bosagora
+	if rules.IsLondon && !st.evm.ChainConfig().IsBosagora(st.evm.Context.BlockNumber) {
 		effectiveTip = cmath.BigMin(msg.GasTipCap, new(big.Int).Sub(msg.GasFeeCap, st.evm.Context.BaseFee))
 	}
 
@@ -436,9 +437,15 @@ func (st *StateTransition) TransitionDb() (*ExecutionResult, error) {
 		// are 0. This avoids a negative effectiveTip being applied to
 		// the coinbase when simulating calls.
 	} else {
-		fee := new(big.Int).SetUint64(st.gasUsed())
-		fee.Mul(fee, effectiveTip)
-		st.state.AddBalance(st.evm.Context.Coinbase, fee)
+		txFee := new(big.Int).Mul(new(big.Int).SetUint64(st.gasUsed()), effectiveTip)
+
+		if st.evm.ChainConfig().IsBosagora(st.evm.Context.BlockNumber) {
+			commonsCut := new(big.Int).Div(new(big.Int).Mul(big.NewInt(30), txFee), big.NewInt(100)) // %30 of txFee
+			st.state.AddBalance(st.evm.Context.Coinbase, txFee.Sub(txFee, commonsCut))               // total - commons cut
+			st.state.AddBalance(st.evm.ChainConfig().Bosagora.CommonsBudget, commonsCut)             // commons cut
+		} else {
+			st.state.AddBalance(st.evm.Context.Coinbase, txFee)
+		}
 	}
 
 	return &ExecutionResult{
