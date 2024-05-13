@@ -40,7 +40,7 @@ cd poohnet
 
 ### run node
 ```
-./enode testnet enode1
+./enode testnet node1
 ```
 
 ## Run with local binary
