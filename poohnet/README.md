@@ -4,7 +4,7 @@ The network id is only set in these files.
 - Mainnet: 12300 (set in ./poohnet/config/el/genesis.json)
 - Mainnet for merge: 12300 (set in ./poohnet/config/el/genesis_merge.json)
 - Testnet: 12301 (set in ./poohnet/config/el/genesis_testnet.json)
-- Localnet: 12302 (set in ./poohnet/config/el/genesis_local.json)
+- Devnet: 12302 (set in ./poohnet/config/el/genesis_devnet.json)
 
 ## Run Testnet
 
@@ -66,3 +66,6 @@ init은 위의 [Run Testnet](#run-testnet) 참고
 ```
 ./enode-cmd
 ```
+
+## Setup Blockscout
+[Setup Blockscout](./docs/setup-blockscout.md) 참고
