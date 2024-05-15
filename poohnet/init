@@ -53,7 +53,7 @@ docker run -it \
   -v $HOME/.pooh/el:/data \
   -v ./$config_folder/el:/config \
   --name pow-node --rm \
-  linked0/poohnet-pow:latest \
+  linked0/poohgeth:latest \
   --datadir=/data \
   init \
   /config/$genesis_file
